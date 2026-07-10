@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Real Estate Assistant — Live Demo | Adnan Alvi Real Estate</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
-            --gold: #C9A84C;
-            --gold-light: #e8c97a;
-            --dark: #0A0F1E;
-            --dark2: #111827;
-            --border: rgba(201,168,76,0.2);
-            --text: #e8eaf0;
-            --muted: #8892a4;
+            --gold: #D4AF37;
+            --gold-light: #F3E5AB;
+            --dark: #09090b;
+            --dark2: #18181b;
+            --border: rgba(212, 175, 55, 0.2);
+            --text: #f4f4f5;
+            --muted: #a1a1aa;
             --green: #10B981;
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
         }
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-body);
             background: var(--dark);
             color: var(--text);
             margin: 0;
@@ -29,112 +31,144 @@
 
         /* ── LEFT SIDEBAR (DEMO CONTROLS) ── */
         .sidebar {
-            width: 420px;
+            width: 380px;
             background: var(--dark2);
             border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
             height: 100vh;
-            z-index: 10;
+            z-index: 50;
             box-shadow: 4px 0 24px rgba(0,0,0,0.5);
+            flex-shrink: 0;
         }
         .sidebar-header {
             padding: 24px;
-            background: linear-gradient(135deg, #1a1000 0%, #0A0F1E 100%);
+            background: linear-gradient(135deg, #1f190a 0%, #09090b 100%);
             border-bottom: 1px solid var(--border);
         }
-        .brand { font-size: 20px; font-weight: 800; }
+        .brand { font-family: var(--font-heading); font-size: 22px; font-weight: 800; }
         .brand span { color: var(--gold); }
         .live-badge {
-            display: inline-flex; align-items: center; gap: 6px;
-            background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3);
-            border-radius: 100px; padding: 4px 12px; font-size: 11px;
-            font-weight: 700; color: var(--green); margin-top: 10px;
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3);
+            border-radius: 100px; padding: 6px 14px; font-size: 11px;
+            font-weight: 700; color: var(--green); margin-top: 12px;
+            text-transform: uppercase; letter-spacing: 0.5px;
         }
         .live-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
 
-        .sidebar-content {
-            padding: 24px;
-            overflow-y: auto;
-            flex: 1;
-        }
+        .sidebar-content { padding: 24px; overflow-y: auto; flex: 1; }
         
-        /* SMS Section */
-        .sms-section {
-            background: rgba(201,168,76,0.05);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 24px;
-        }
-        .sms-title { font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-        .sms-desc { font-size: 12px; color: var(--muted); margin-bottom: 12px; line-height: 1.5; }
-        .sms-input {
-            width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--border);
-            border-radius: 6px; padding: 10px 12px; color: white; font-size: 13px; margin-bottom: 10px; outline: none;
-        }
+        .sms-section { background: rgba(212,175,55,0.05); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 32px; }
+        .sms-title { font-size: 14px; font-weight: 700; color: var(--gold); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+        .sms-desc { font-size: 12px; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
+        .sms-input { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; color: white; font-size: 13px; margin-bottom: 12px; outline: none; font-family: var(--font-body); }
         .sms-input:focus { border-color: var(--gold); }
-        .sms-btn {
-            width: 100%; background: var(--gold); color: #000; border: none;
-            border-radius: 6px; padding: 10px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.2s;
-        }
+        .sms-btn { width: 100%; background: var(--gold); color: #000; border: none; border-radius: 8px; padding: 12px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.2s; font-family: var(--font-body); }
         .sms-btn:hover { background: var(--gold-light); }
 
-        /* Scenarios */
-        .section-title { font-size: 11px; font-weight: 800; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; margin-bottom: 16px; }
+        .section-title { font-family: var(--font-heading); font-size: 12px; font-weight: 800; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; margin-bottom: 20px; }
         
-        .scenario-card {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 10px; padding: 16px; margin-bottom: 12px;
-            cursor: pointer; transition: all 0.2s; position: relative;
-        }
-        .scenario-card:hover { border-color: var(--gold); transform: translateY(-2px); background: rgba(201,168,76,0.03); }
-        .s-num { font-size: 10px; font-weight: 800; color: var(--gold); margin-bottom: 6px; text-transform: uppercase; }
-        .s-title { font-size: 13px; font-weight: 700; color: white; margin-bottom: 6px; }
-        .s-desc { font-size: 12px; color: var(--muted); line-height: 1.4; margin-bottom: 12px; }
-        .s-msg { background: rgba(0,0,0,0.3); padding: 8px 10px; border-radius: 6px; font-size: 11px; color: var(--gold-light); font-style: italic; border-left: 2px solid var(--gold); }
-        .try-btn { margin-top: 12px; background: rgba(255,255,255,0.1); color: white; border: none; border-radius: 6px; padding: 6px 12px; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .scenario-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 18px; margin-bottom: 16px; cursor: pointer; transition: all 0.2s; }
+        .scenario-card:hover { border-color: var(--gold); background: rgba(212,175,55,0.03); transform: translateY(-2px); }
+        .s-num { font-size: 10px; font-weight: 800; color: var(--gold); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .s-title { font-family: var(--font-heading); font-size: 15px; font-weight: 700; color: white; margin-bottom: 6px; }
+        .s-desc { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 14px; }
+        .s-msg { background: rgba(0,0,0,0.4); padding: 10px 12px; border-radius: 6px; font-size: 12px; color: var(--gold-light); font-style: italic; border-left: 2px solid var(--gold); }
+        .try-btn { margin-top: 14px; background: rgba(255,255,255,0.1); color: white; border: none; border-radius: 6px; padding: 8px 16px; font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; font-family: var(--font-body); }
         .scenario-card:hover .try-btn { background: var(--gold); color: #000; }
 
         /* ── RIGHT AREA (MOCK WEBSITE) ── */
-        .main-content {
-            flex: 1;
-            overflow-y: auto;
-            position: relative;
-            background: #000;
-        }
+        .main-content { flex: 1; overflow-y: auto; overflow-x: hidden; position: relative; background: #000; scroll-behavior: smooth; }
         
-        .mock-hero {
-            min-height: 100vh;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.9) 100%),
-            url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop') center/cover no-repeat;
-            display: flex; flex-direction: column;
-            padding: 0;
-        }
+        /* Navbar */
         .mock-nav {
+            position: sticky; top: 0; z-index: 40;
             display: flex; align-items: center; justify-content: space-between;
-            padding: 24px 48px; background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            padding: 24px 60px; background: rgba(9, 9, 11, 0.9); backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .mock-logo { font-size: 24px; font-weight: 900; color: white; }
-        .mock-logo span { color: var(--gold); }
-        .mock-links { display: flex; gap: 32px; }
-        .mock-links a { color: white; text-decoration: none; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-        
-        .hero-content { margin: auto 48px 80px; max-width: 600px; }
-        .hero-badge {
-            display: inline-flex; align-items: center; padding: 6px 16px;
-            background: rgba(201,168,76,0.2); border: 1px solid var(--gold);
-            color: var(--gold); border-radius: 100px; font-size: 12px; font-weight: 700; margin-bottom: 24px; letter-spacing: 1px;
+        .nav-logo { font-family: var(--font-heading); font-size: 24px; font-weight: 900; color: white; cursor: pointer; text-decoration: none; }
+        .nav-logo span { color: var(--gold); }
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; transition: color 0.2s; cursor: pointer; }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+        .nav-phone { font-weight: 700; color: white; background: rgba(212,175,55,0.15); padding: 8px 16px; border-radius: 100px; border: 1px solid var(--border); font-size: 14px; }
+
+        /* Pages */
+        .page-view { display: none; animation: fadeIn 0.4s ease; min-height: 100vh; }
+        .page-view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Home Hero */
+        .mock-hero {
+            min-height: 85vh;
+            background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%),
+            url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop') center/cover no-repeat;
+            display: flex; align-items: center; padding: 0 60px;
         }
-        .hero-title { font-size: clamp(40px, 5vw, 64px); font-weight: 900; color: white; line-height: 1.1; margin-bottom: 24px; }
-        .hero-desc { font-size: 18px; color: rgba(255,255,255,0.8); line-height: 1.6; margin-bottom: 32px; }
-        .hero-btn { background: var(--gold); color: #000; padding: 16px 32px; font-size: 14px; font-weight: 800; border: none; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
+        .hero-content { max-width: 700px; }
+        .hero-badge { display: inline-flex; align-items: center; padding: 6px 16px; background: rgba(212,175,55,0.2); border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-size: 11px; font-weight: 800; margin-bottom: 24px; letter-spacing: 2px; text-transform: uppercase; }
+        .hero-title { font-family: var(--font-heading); font-size: clamp(48px, 6vw, 76px); font-weight: 900; color: white; line-height: 1.1; margin-bottom: 24px; }
+        .hero-desc { font-size: 18px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 40px; max-width: 500px; }
+        .hero-btns { display: flex; gap: 16px; }
+        .btn-primary { background: var(--gold); color: #000; padding: 18px 36px; font-size: 14px; font-weight: 800; border: none; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.2s; }
+        .btn-primary:hover { background: white; }
+        .btn-outline { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.4); padding: 18px 36px; font-size: 14px; font-weight: 700; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.2s; }
+        .btn-outline:hover { border-color: white; }
+
+        /* Stats Section */
+        .stats-banner { display: flex; justify-content: space-around; padding: 60px; background: var(--dark2); border-top: 1px solid rgba(255,255,255,0.05); }
+        .stat-item { text-align: center; }
+        .stat-num { font-family: var(--font-heading); font-size: 48px; font-weight: 900; color: var(--gold); margin-bottom: 8px; }
+        .stat-lbl { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+
+        /* Section Global */
+        .section { padding: 100px 60px; }
+        .sec-title { font-family: var(--font-heading); font-size: 40px; font-weight: 800; margin-bottom: 16px; text-align: center; }
+        .sec-sub { font-size: 16px; color: var(--muted); text-align: center; max-width: 600px; margin: 0 auto 60px; line-height: 1.6; }
+
+        /* Properties Grid */
+        .prop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; }
+        .prop-card { background: var(--dark2); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; cursor: pointer; }
+        .prop-card:hover { transform: translateY(-8px); border-color: var(--border); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .prop-img { height: 240px; width: 100%; object-fit: cover; border-bottom: 2px solid var(--gold); }
+        .prop-body { padding: 24px; }
+        .prop-price { font-family: var(--font-heading); font-size: 28px; font-weight: 800; color: white; margin-bottom: 12px; }
+        .prop-addr { font-size: 15px; color: var(--muted); margin-bottom: 20px; line-height: 1.4; }
+        .prop-meta { display: flex; gap: 16px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; }
+        .meta-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: white; font-weight: 600; }
+        .meta-item span { color: var(--gold); }
+
+        /* About Section */
+        .about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1100px; margin: 0 auto; }
+        .about-img { width: 100%; border-radius: 12px; border: 4px solid var(--dark2); outline: 1px solid var(--gold); outline-offset: -12px; }
+        .about-content h2 { font-family: var(--font-heading); font-size: 48px; font-weight: 900; margin-bottom: 24px; }
+        .about-content h2 span { color: var(--gold); }
+        .about-content p { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 20px; }
+
+        /* Contact Section */
+        .contact-wrap { max-width: 600px; margin: 0 auto; background: var(--dark2); padding: 40px; border-radius: 16px; border: 1px solid var(--border); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .form-control { width: 100%; background: #000; border: 1px solid rgba(255,255,255,0.1); padding: 14px; border-radius: 8px; color: white; font-size: 15px; font-family: var(--font-body); }
+        .form-control:focus { outline: none; border-color: var(--gold); }
+        textarea.form-control { height: 120px; resize: none; }
+
+        /* Footer */
+        .mock-footer { background: #000; padding: 60px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; }
+        .mock-footer h3 { font-family: var(--font-heading); font-size: 24px; font-weight: 800; margin-bottom: 20px; }
+        .mock-footer h3 span { color: var(--gold); }
+        .mock-footer p { color: var(--muted); font-size: 14px; margin-bottom: 30px; }
+        .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 40px; }
+        .footer-links a { color: white; text-decoration: none; font-size: 14px; font-weight: 600; cursor: pointer; }
+        .copyright { color: #52525b; font-size: 12px; }
 
         /* ── SMS TOAST ── */
         .sms-toast {
-            position: fixed; bottom: 24px; left: 440px; /* Offset by sidebar */
-            background: var(--dark3); border: 1px solid var(--green);
+            position: fixed; bottom: 24px; left: 404px; /* Offset by sidebar */
+            background: #18181b; border: 1px solid var(--green);
             border-radius: 12px; padding: 20px; max-width: 380px;
             z-index: 9999; box-shadow: 0 12px 40px rgba(0,0,0,0.6);
             display: none; animation: slideUp 0.4s ease;
@@ -147,11 +181,16 @@
         .toast-highlight { color: var(--gold); font-weight: 700; }
         .toast-close { position: absolute; top: 16px; right: 16px; background: none; border: none; color: var(--muted); font-size: 18px; cursor: pointer; }
 
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
             body { flex-direction: column; overflow: auto; }
-            .sidebar { width: 100%; height: auto; box-shadow: none; border-right: none; border-bottom: 1px solid var(--border); }
-            .mock-hero { min-height: 600px; }
-            .sms-toast { left: 24px; }
+            .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
+            .main-content { overflow: visible; }
+            .mock-nav { padding: 20px; }
+            .nav-links { display: none; }
+            .mock-hero { padding: 0 20px; min-height: 70vh; }
+            .sms-toast { left: 24px; right: 24px; max-width: none; }
+            .about-wrap { grid-template-columns: 1fr; }
+            .stats-banner { flex-direction: column; gap: 40px; padding: 40px 20px; }
         }
     </style>
 </head>
@@ -161,15 +200,14 @@
 <div class="sidebar">
     <div class="sidebar-header">
         <div class="brand">Adnan <span>Alvi</span></div>
-        <div style="font-size: 11px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 1px;">Real Estate Agent Demo</div>
-        <div class="live-badge"><div class="live-dot"></div> AI Assistant is Active</div>
+        <div style="font-size: 10px; color: var(--muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700;">Real Estate Agent Demo</div>
+        <div class="live-badge"><div class="live-dot"></div> AI is Active</div>
     </div>
     
     <div class="sidebar-content">
-        
         <div class="sms-section">
-            <div class="sms-title">📱 SMS Lead Alert Demo</div>
-            <div class="sms-desc">Enter your mobile number. When the AI finishes qualifying the buyer, you will get an instant alert.</div>
+            <div class="sms-title">📱 Lead Alert Demo</div>
+            <div class="sms-desc">Enter your real mobile number. When the AI qualifies a buyer on the website, you'll instantly get an SMS notification.</div>
             <input type="tel" class="sms-input" id="agentPhone" placeholder="e.g. +1 647 555 0123" />
             <button class="sms-btn" onclick="activateSmsDemo()">Activate Alert</button>
         </div>
@@ -199,29 +237,122 @@
             <div class="s-msg">"What is land transfer tax in Ontario?"</div>
             <button class="try-btn">▶ Try This</button>
         </div>
-        
     </div>
 </div>
 
-<!-- RIGHT MAIN CONTENT -->
-<div class="main-content">
-    <div class="mock-hero">
-        <nav class="mock-nav">
-            <div class="mock-logo">Adnan <span>Alvi</span></div>
-            <div class="mock-links">
-                <a href="#">Properties</a>
-                <a href="#">Sellers</a>
-                <a href="#">About</a>
+<!-- RIGHT MAIN CONTENT (SPA) -->
+<div class="main-content" id="mainScroll">
+    
+    <!-- Navbar -->
+    <nav class="mock-nav">
+        <a class="nav-logo" onclick="navTo('home')">Adnan <span>Alvi</span></a>
+        <div class="nav-links">
+            <a onclick="navTo('home')" class="nav-link active" data-target="home">Home</a>
+            <a onclick="navTo('properties')" class="nav-link" data-target="properties">Properties</a>
+            <a onclick="navTo('about')" class="nav-link" data-target="about">About</a>
+            <a onclick="navTo('contact')" class="nav-link" data-target="contact">Contact</a>
+        </div>
+        <div class="nav-phone">📞 1-800-555-ALVI</div>
+    </nav>
+
+    <!-- VIEWS -->
+    
+    <!-- 1. HOME VIEW -->
+    <div id="view-home" class="page-view active">
+        <div class="mock-hero">
+            <div class="hero-content">
+                <div class="hero-badge">Ontario's Premier Real Estate Expert</div>
+                <h1 class="hero-title">Elevate Your Lifestyle.</h1>
+                <p class="hero-desc">Discover luxury homes and exclusive properties across Milton, Oakville, and the Greater Toronto Area. Over $2.1B in sales volume.</p>
+                <div class="hero-btns">
+                    <button class="btn-primary" onclick="navTo('properties')">View Properties</button>
+                    <button class="btn-outline" onclick="navTo('contact')">Get in Touch</button>
+                </div>
             </div>
-        </nav>
+        </div>
+
+        <div class="stats-banner">
+            <div class="stat-item"><div class="stat-num">$2.1B+</div><div class="stat-lbl">Sales Volume</div></div>
+            <div class="stat-item"><div class="stat-num">200+</div><div class="stat-lbl">Happy Families</div></div>
+            <div class="stat-item"><div class="stat-num">12</div><div class="stat-lbl">Years Experience</div></div>
+            <div class="stat-item"><div class="stat-num">4.9★</div><div class="stat-lbl">Google Rating</div></div>
+        </div>
         
-        <div class="hero-content">
-            <div class="hero-badge">ONTARIO'S PREMIER REAL ESTATE EXPERT</div>
-            <h1 class="hero-title">Elevate Your Lifestyle.</h1>
-            <p class="hero-desc">Discover luxury homes and exclusive properties across Milton, Oakville, and the GTA. Over $2.1B in sales volume.</p>
-            <button class="hero-btn">View Exclusive Listings</button>
+        <div class="section">
+            <h2 class="sec-title">Featured Listings</h2>
+            <p class="sec-sub">Explore our curated selection of luxury properties currently on the market.</p>
+            <div class="prop-grid" id="home-featured">
+                <!-- Populated via JS for reuse -->
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="btn-outline" onclick="navTo('properties')">View All Properties</button>
+            </div>
         </div>
     </div>
+
+    <!-- 2. PROPERTIES VIEW -->
+    <div id="view-properties" class="page-view">
+        <div class="section">
+            <h2 class="sec-title">Exclusive Properties</h2>
+            <p class="sec-sub">Browse our full portfolio of luxury homes and condos across Ontario.</p>
+            <div class="prop-grid" id="full-properties">
+                <!-- Populated via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. ABOUT VIEW -->
+    <div id="view-about" class="page-view">
+        <div class="section">
+            <div class="about-wrap">
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop" class="about-img" alt="Adnan Alvi">
+                <div class="about-content">
+                    <h2>Meet Adnan <span>Alvi</span></h2>
+                    <p>With over a decade of experience in the Greater Toronto Area real estate market, Adnan Alvi has established himself as a trusted advisor for luxury buyers, sellers, and investors.</p>
+                    <p>His approach is built on integrity, deep market knowledge, and an unwavering commitment to client success. Adnan leverages cutting-edge technology, including AI, to ensure his clients always have the competitive edge.</p>
+                    <p>Whether you're looking for your first home, upgrading to a luxury estate, or expanding your investment portfolio, Adnan provides a seamless, stress-free experience from start to finish.</p>
+                    <button class="btn-primary" style="margin-top:20px;" onclick="navTo('contact')">Work With Adnan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. CONTACT VIEW -->
+    <div id="view-contact" class="page-view">
+        <div class="section">
+            <h2 class="sec-title">Get in Touch</h2>
+            <p class="sec-sub">Ready to make a move? Contact our office or chat with our AI assistant instantly.</p>
+            <div class="contact-wrap">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" class="form-control" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" class="form-control" placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea class="form-control" placeholder="How can we help you?"></textarea>
+                </div>
+                <button class="btn-primary" style="width: 100%;">Send Message</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shared Footer -->
+    <footer class="mock-footer">
+        <h3>Adnan <span>Alvi</span></h3>
+        <p>Ontario's Premier Real Estate Professional</p>
+        <div class="footer-links">
+            <a onclick="navTo('home')">Home</a>
+            <a onclick="navTo('properties')">Properties</a>
+            <a onclick="navTo('about')">About</a>
+            <a onclick="navTo('contact')">Contact</a>
+        </div>
+        <div class="copyright">© 2026 Adnan Alvi Real Estate. All rights reserved. Demo powered by BotFlow AI.</div>
+    </footer>
+
 </div>
 
 <!-- SMS TOAST -->
@@ -236,16 +367,69 @@
     </div>
 </div>
 
+<!-- BotFlow AI Embed -->
 <script>
-// Chatbot Configuration - using the actual embed script!
 window.CHATBOT_CONFIG = { 
     botId: "demo-real-estate",
-    autoOpen: true // This will auto-open the chat when the page loads!
+    autoOpen: true
 };
 </script>
 <script src="https://chatbot-flow.vercel.app/api/embed" defer></script>
 
 <script>
+// SPA Routing Logic
+function navTo(pageId) {
+    // Hide all
+    document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+    // Show target
+    document.getElementById('view-' + pageId).classList.add('active');
+    
+    // Update nav classes
+    document.querySelectorAll('.nav-link').forEach(el => {
+        if(el.dataset.target === pageId) el.classList.add('active');
+        else el.classList.remove('active');
+    });
+
+    // Scroll to top
+    document.getElementById('mainScroll').scrollTo(0, 0);
+}
+
+// Property Data
+const properties = [
+    { price: '$2,450,000', addr: '128 Luxury Lane, Oakville, ON', beds: 4, baths: 5, sqft: '4,200', img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop' },
+    { price: '$1,299,000', addr: '45 Maple Ave, Milton, ON', beds: 3, baths: 3, sqft: '2,100', img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop' },
+    { price: '$3,850,000', addr: '88 Lakeshore Rd, Burlington, ON', beds: 5, baths: 6, sqft: '6,500', img: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop' },
+    { price: '$899,000', addr: '12 Downtown St #405, Toronto, ON', beds: 2, baths: 2, sqft: '1,100', img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop' },
+    { price: '$1,750,000', addr: '99 Pine Cr, Richmond Hill, ON', beds: 4, baths: 4, sqft: '3,300', img: 'https://images.unsplash.com/photo-1600566753086-00f18efc2291?q=80&w=2070&auto=format&fit=crop' },
+    { price: '$5,200,000', addr: '1 Bridle Path, Toronto, ON', beds: 6, baths: 8, sqft: '9,000', img: 'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?q=80&w=2070&auto=format&fit=crop' }
+];
+
+function generatePropCards(limit) {
+    let html = '';
+    const items = limit ? properties.slice(0, limit) : properties;
+    items.forEach(p => {
+        html += `
+        <div class="prop-card">
+            <img src="${p.img}" class="prop-img">
+            <div class="prop-body">
+                <div class="prop-price">${p.price}</div>
+                <div class="prop-addr">${p.addr}</div>
+                <div class="prop-meta">
+                    <div class="meta-item"><span>🛏</span> ${p.beds} Beds</div>
+                    <div class="meta-item"><span>🚿</span> ${p.baths} Baths</div>
+                    <div class="meta-item"><span>📐</span> ${p.sqft} sqft</div>
+                </div>
+            </div>
+        </div>`;
+    });
+    return html;
+}
+
+// Populate properties
+document.getElementById('home-featured').innerHTML = generatePropCards(3);
+document.getElementById('full-properties').innerHTML = generatePropCards();
+
+// Scenarios & SMS Logic
 const scenarios = {
     1: "I'm just looking for a house in Milton, but I don't want to talk to a realtor yet.",
     2: "How much is my 4-bedroom detached house worth near Derry & Bronte in Oakville?",
@@ -254,13 +438,11 @@ const scenarios = {
 
 function tryScenario(num) {
     const msg = scenarios[num];
-    // The embed script creates an iframe with id "botflow-iframe"
     const iframe = document.getElementById('botflow-iframe');
     if (iframe) {
         iframe.contentWindow.postMessage({ type: 'DEMO_SCENARIO', message: msg }, '*');
     }
     
-    // Visual feedback
     const card = event.currentTarget;
     const btn = card.querySelector('.try-btn');
     const orig = btn.textContent;
@@ -288,7 +470,7 @@ function activateSmsDemo() {
     const btn = document.querySelector('.sms-btn');
     btn.textContent = '✓ Alert Activated!';
     btn.style.background = '#10B981';
-    btn.style.color = 'white';
+    btn.style.color = '#000';
     input.disabled = true;
     input.style.opacity = '0.5';
 }
@@ -323,6 +505,5 @@ setTimeout(() => {
     }
 }, 40000);
 </script>
-
 </body>
 </html>
