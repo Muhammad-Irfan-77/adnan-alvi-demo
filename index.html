@@ -165,6 +165,24 @@
         .footer-links a { color: white; text-decoration: none; font-size: 14px; font-weight: 600; cursor: pointer; }
         .copyright { color: #52525b; font-size: 12px; }
 
+        /* ── INTRO BANNER ── */
+        .intro-banner {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: linear-gradient(90deg, #0a0a0a 0%, #1a1500 50%, #0a0a0a 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 40px;
+            display: flex; align-items: center; justify-content: space-between; gap: 20px;
+            flex-wrap: wrap;
+        }
+        .intro-text { flex: 1; }
+        .intro-text h2 { font-family: var(--font-heading); font-size: 16px; font-weight: 800; color: white; margin-bottom: 4px; }
+        .intro-text h2 span { color: var(--gold); }
+        .intro-text p { font-size: 12px; color: var(--muted); line-height: 1.5; max-width: 680px; }
+        .intro-bonus { font-size: 11px; color: var(--gold); font-weight: 600; background: rgba(212,175,55,0.1); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; white-space: nowrap; max-width: 240px; line-height: 1.5; }
+        .intro-close { background: none; border: none; color: var(--muted); font-size: 20px; cursor: pointer; flex-shrink: 0; }
+        .intro-close:hover { color: white; }
+        body.has-intro .sidebar, body.has-intro .main-content { padding-top: 72px; }
+
         /* ── SMS TOAST ── */
         .sms-toast {
             position: fixed; bottom: 24px; left: 404px; /* Offset by sidebar */
@@ -194,12 +212,22 @@
         }
     </style>
 </head>
-<body>
+<body class="has-intro">
+
+<!-- INTRO BANNER -->
+<div class="intro-banner" id="introBanner">
+    <div class="intro-text">
+        <h2>Welcome to the <span>AI Chatbot</span> Demo</h2>
+        <p>Experience firsthand how our AI builds trust, captures and qualifies leads, and automatically schedules meetings for you or your team.</p>
+    </div>
+    <div class="intro-bonus">💡 <strong>Bonus:</strong> To see how it alerts you instantly about "hot leads" via SMS, make sure to test the lead capture flow yourself!</div>
+    <button class="intro-close" onclick="closeIntro()" title="Close">✕</button>
+</div>
 
 <!-- LEFT SIDEBAR -->
 <div class="sidebar">
     <div class="sidebar-header">
-        <div class="brand">Adnan <span>Alvi</span></div>
+        <div class="brand"><span data-agent-first>Adnan</span> <span style="color:var(--gold)" data-agent-last>Alvi</span></div>
         <div style="font-size: 10px; color: var(--muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700;">Real Estate Agent Demo</div>
         <div class="live-badge"><div class="live-dot"></div> AI is Active</div>
     </div>
@@ -237,6 +265,22 @@
             <div class="s-msg">"What is land transfer tax in Ontario?"</div>
             <button class="try-btn">▶ Try This</button>
         </div>
+
+        <div class="scenario-card" onclick="tryScenario(4)">
+            <div class="s-num">Scenario 04</div>
+            <div class="s-title">Looking to Rent</div>
+            <div class="s-desc">Tests the renter qualification flow — budget, location, timeline, requirements.</div>
+            <div class="s-msg">"I am interested in renting a 2-bedroom apartment in Mississauga under $2,500/month."</div>
+            <button class="try-btn">▶ Try This</button>
+        </div>
+
+        <div class="scenario-card" onclick="tryScenario(5)">
+            <div class="s-num">Scenario 05</div>
+            <div class="s-title">Ready to Sell</div>
+            <div class="s-desc">Tests the seller flow — AI gathers property details and positions the agent as the local expert.</div>
+            <div class="s-msg">"I am interested in selling my home. It's a 3-bedroom semi-detached in Brampton."</div>
+            <button class="try-btn">▶ Try This</button>
+        </div>
     </div>
 </div>
 
@@ -245,7 +289,7 @@
     
     <!-- Navbar -->
     <nav class="mock-nav">
-        <a class="nav-logo" onclick="navTo('home')">Adnan <span>Alvi</span></a>
+        <a class="nav-logo" onclick="navTo('home')"><span data-agent-first>Adnan</span> <span style="color:var(--gold)" data-agent-last>Alvi</span></a>
         <div class="nav-links">
             <a onclick="navTo('home')" class="nav-link active" data-target="home">Home</a>
             <a onclick="navTo('properties')" class="nav-link" data-target="properties">Properties</a>
@@ -307,11 +351,11 @@
             <div class="about-wrap">
                 <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop" class="about-img" alt="Adnan Alvi">
                 <div class="about-content">
-                    <h2>Meet Adnan <span>Alvi</span></h2>
-                    <p>With over a decade of experience in the Greater Toronto Area real estate market, Adnan Alvi has established himself as a trusted advisor for luxury buyers, sellers, and investors.</p>
-                    <p>His approach is built on integrity, deep market knowledge, and an unwavering commitment to client success. Adnan leverages cutting-edge technology, including AI, to ensure his clients always have the competitive edge.</p>
-                    <p>Whether you're looking for your first home, upgrading to a luxury estate, or expanding your investment portfolio, Adnan provides a seamless, stress-free experience from start to finish.</p>
-                    <button class="btn-primary" style="margin-top:20px;" onclick="navTo('contact')">Work With Adnan</button>
+                    <h2>Meet <span data-agent-first>Adnan</span> <span style="color:var(--gold)" data-agent-last>Alvi</span></h2>
+                    <p>With over a decade of experience in the Greater Toronto Area real estate market, <span data-agent-full>Adnan Alvi</span> has established themselves as a trusted advisor for luxury buyers, sellers, and investors.</p>
+                    <p>Their approach is built on integrity, deep market knowledge, and an unwavering commitment to client success. <span data-agent-first>Adnan</span> leverages cutting-edge technology, including AI, to ensure their clients always have the competitive edge.</p>
+                    <p>Whether you're looking for your first home, upgrading to a luxury estate, or expanding your investment portfolio, <span data-agent-first>Adnan</span> provides a seamless, stress-free experience from start to finish.</p>
+                    <button class="btn-primary" style="margin-top:20px;" onclick="navTo('contact')">Work With <span data-agent-first>Adnan</span></button>
                 </div>
             </div>
         </div>
@@ -342,7 +386,7 @@
 
     <!-- Shared Footer -->
     <footer class="mock-footer">
-        <h3>Adnan <span>Alvi</span></h3>
+        <h3><span data-agent-first>Adnan</span> <span style="color:var(--gold)" data-agent-last>Alvi</span></h3>
         <p>Ontario's Premier Real Estate Professional</p>
         <div class="footer-links">
             <a onclick="navTo('home')">Home</a>
@@ -350,7 +394,7 @@
             <a onclick="navTo('about')">About</a>
             <a onclick="navTo('contact')">Contact</a>
         </div>
-        <div class="copyright">© 2026 Adnan Alvi Real Estate. All rights reserved. Demo powered by BotFlow AI.</div>
+        <div class="copyright">&copy; 2026 <span data-agent-full>Adnan Alvi</span> Real Estate. All rights reserved. Demo powered by BotFlow AI.</div>
     </footer>
 
 </div>
@@ -429,11 +473,42 @@ function generatePropCards(limit) {
 document.getElementById('home-featured').innerHTML = generatePropCards(3);
 document.getElementById('full-properties').innerHTML = generatePropCards();
 
+// ── DYNAMIC AGENT NAME FROM URL ──
+// URL format: demo.vercel.app/?agent=James+Bond&city=Toronto
+(function applyDynamicName() {
+    const params = new URLSearchParams(window.location.search);
+    const agentName = params.get('agent') || 'Adnan Alvi';
+    const city = params.get('city') || 'Ontario';
+
+    // Split into first and last name for styled rendering
+    const parts = agentName.trim().split(' ');
+    const firstName = parts.slice(0, -1).join(' ') || agentName;
+    const lastName = parts[parts.length - 1] || '';
+
+    // Replace all .agent-name-full elements
+    document.querySelectorAll('[data-agent-full]').forEach(el => { el.textContent = agentName; });
+    document.querySelectorAll('[data-agent-first]').forEach(el => { el.textContent = firstName; });
+    document.querySelectorAll('[data-agent-last]').forEach(el => { el.textContent = lastName; });
+
+    // Replace city
+    document.querySelectorAll('[data-agent-city]').forEach(el => { el.textContent = city; });
+
+    // Update page title
+    document.title = `AI Chatbot Demo | ${agentName} Real Estate`;
+})();
+
+function closeIntro() {
+    document.getElementById('introBanner').style.display = 'none';
+    document.body.classList.remove('has-intro');
+}
+
 // Scenarios & SMS Logic
 const scenarios = {
     1: "I'm just looking for a house in Milton, but I don't want to talk to a realtor yet.",
     2: "How much is my 4-bedroom detached house worth near Derry & Bronte in Oakville?",
-    3: "What is land transfer tax in Ontario?"
+    3: "What is land transfer tax in Ontario?",
+    4: "I am interested in renting a 2-bedroom apartment in Mississauga under $2,500/month.",
+    5: "I am interested in selling my home. It's a 3-bedroom semi-detached in Brampton."
 };
 
 function tryScenario(num) {
