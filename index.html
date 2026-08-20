@@ -10,9 +10,8 @@
         :root {
             --gold: #D4AF37;
             --gold-light: #F3E5AB;
-            --dark: #09090b;
-            --dark2: #121215;
-            --dark3: #18181b;
+            --dark: #000000;
+            --dark2: #0d0d10;
             --border: rgba(212, 175, 55, 0.2);
             --text: #f4f4f5;
             --muted: #a1a1aa;
@@ -98,128 +97,12 @@
         .try-btn { margin-top: 14px; background: rgba(255,255,255,0.1); color: white; border: none; border-radius: 6px; padding: 8px 16px; font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; font-family: var(--font-body); }
         .scenario-card:hover .try-btn { background: var(--gold); color: #000; }
 
-        /* ── RIGHT MAIN CONTENT (BLACK BACKGROUND DEMO CANVAS) ── */
+        /* ── RIGHT MAIN CONTENT (COMPLETELY SOLID EMPTY BLACK BACKGROUND) ── */
         .main-content {
             flex: 1;
-            overflow-y: auto;
-            overflow-x: hidden;
+            background: #000000;
+            height: 100vh;
             position: relative;
-            background: #050507;
-            background-image: 
-                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 60px;
-        }
-
-        .demo-showcase {
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-            z-index: 10;
-        }
-
-        .showcase-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 20px;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            border-radius: 100px;
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 24px;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
-        }
-
-        .showcase-title {
-            font-family: var(--font-heading);
-            font-size: clamp(38px, 4.5vw, 62px);
-            font-weight: 900;
-            color: #ffffff;
-            line-height: 1.15;
-            margin-bottom: 20px;
-            letter-spacing: -0.5px;
-        }
-
-        .showcase-title span {
-            background: linear-gradient(135deg, #FFF 30%, var(--gold) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .showcase-desc {
-            font-size: 17px;
-            color: var(--muted);
-            line-height: 1.7;
-            max-width: 620px;
-            margin: 0 auto 40px;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 40px;
-            text-align: left;
-        }
-
-        .feature-card {
-            background: rgba(18, 18, 21, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 24px;
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover {
-            border-color: var(--gold);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-        }
-
-        .f-icon {
-            font-size: 28px;
-            margin-bottom: 14px;
-            display: inline-block;
-        }
-
-        .f-title {
-            font-family: var(--font-heading);
-            font-size: 16px;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 8px;
-        }
-
-        .f-desc {
-            font-size: 13px;
-            color: var(--muted);
-            line-height: 1.5;
-        }
-
-        .interactive-hint {
-            margin-top: 36px;
-            padding: 14px 24px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px dashed rgba(212, 175, 55, 0.4);
-            border-radius: 12px;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--gold-light);
-            font-size: 14px;
-            font-weight: 600;
         }
 
         /* ── SMS TOAST ── */
@@ -241,8 +124,7 @@
         @media (max-width: 1024px) {
             body { flex-direction: column; overflow: auto; }
             .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
-            .main-content { padding: 40px 20px; }
-            .feature-grid { grid-template-columns: 1fr; }
+            .main-content { height: 50vh; }
             .sms-toast { left: 24px; right: 24px; max-width: none; }
         }
     </style>
@@ -319,38 +201,8 @@
     </div>
 </div>
 
-<!-- RIGHT MAIN CONTENT (BLACK BACKGROUND DEMO CANVAS) -->
-<div class="main-content">
-    <div class="demo-showcase">
-        <div class="showcase-badge">✨ Live AI Conversation Simulator</div>
-        <h1 class="showcase-title">Meet Your 24/7 <span>Real Estate AI Partner</span></h1>
-        <p class="showcase-desc">
-            Interact with the AI Assistant on the bottom right, or click any <strong>Test Scenario</strong> on the left to watch how it answers questions, searches real-time properties, and qualifies high-intent leads.
-        </p>
-
-        <div class="feature-grid">
-            <div class="feature-card">
-                <div class="f-icon">⚡</div>
-                <div class="f-title">24/7 Buyer Qualification</div>
-                <div class="f-desc">Captures buyer timeline, budget, mortgage pre-approval, and preferences conversationally.</div>
-            </div>
-            <div class="feature-card">
-                <div class="f-icon">🏡</div>
-                <div class="f-title">Live Property Search</div>
-                <div class="f-desc">Extracts real-time property listings with full photo galleries and direct details.</div>
-            </div>
-            <div class="feature-card">
-                <div class="f-icon">📱</div>
-                <div class="f-title">Instant Lead Notifications</div>
-                <div class="f-desc">Delivers qualified buyer contact info and liked properties directly to your phone.</div>
-            </div>
-        </div>
-
-        <div class="interactive-hint">
-            💬 The AI Chatbot is open on the right — start chatting or pick a scenario!
-        </div>
-    </div>
-</div>
+<!-- RIGHT MAIN CONTENT (COMPLETELY CLEAN EMPTY BLACK BACKGROUND) -->
+<div class="main-content"></div>
 
 <!-- SMS TOAST -->
 <div class="sms-toast" id="smsToast">
